@@ -7,7 +7,6 @@ import { getNav, getLogin, } from '../../reducers'
 
 const mapStateToProps = (state) => ({
   ...getLogin(state),
-  // ...getToken(state),
   ...getNav(state),
 })
 

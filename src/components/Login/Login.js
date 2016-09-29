@@ -5,6 +5,7 @@ import {
   View,
   Text,
   StyleSheet,
+  TouchableHighlight,
 } from 'react-native';
 
 export default class Login extends Component {
@@ -17,15 +18,15 @@ export default class Login extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>I'm the login component</Text>
-        <View style={styles.button}>
-          <Text
-            underlayColor='#ddd'
-            onPress={this.props.fakeLogin}
-            style={{color: 'white', fontWeight: 'bold'}}>
-            {this.props.isLoggedIn ? 'Logout': 'Login' }
-          </Text>
-        </View>
+        <Text style={{margin: 10, fontWeight: 'bold'}}>I'm the login component</Text>
+        <Text style={{margin: 10}}>{!this.props.onLoadding ? 'Please press Login' : 'Attempt login...'}</Text>
+        <TouchableHighlight onPress={this.props.fakeLogin} underlayColor='#ddd'>
+          <View style={styles.button}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>
+              {this.props.isLoggedIn ? 'Logout': 'Login' }
+            </Text>
+          </View>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   },
   button: {
     justifyContent: 'center',
-    margin: 10,
+    margin: 0,
     padding: 20,
     height: 40,
     backgroundColor: 'green',

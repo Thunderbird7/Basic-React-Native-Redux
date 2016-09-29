@@ -1,37 +1,40 @@
-import * as actionTypes from '../constants/actionTypes'
+// @flow
+import { LOGIN_REQUEST, LOGIN_SUCCESS } from '../constants/actionTypes'
 
 const initialState = {
-  isLoggedIn: false
+  isLoggedIn: false,
+  onLoadding: false,
 }
 
 // Reducer
 export default function(state = initialState, action) {
   switch (action.type) {
-    case actionTypes.LOGIN_REQUEST:
+    case LOGIN_REQUEST:
       return {
         ...state,
         isLoggedIn: false,
+        onLoadding: true,
       }
-    case actionTypes.LOGIN_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         isLoggedIn: true,
-        userToken: action.payload.token
+        onLoadding: false,
+        userToken: action.payload.token,
       }
     default:
       return state
   }
 }
 
+// Note:
+// i have a selector here. because reducer is where you define how you login state
+//
 // Login Selectors (mapStateToProps)
 export const getLogin = (state) => ({
-  isLoggedIn: state.isLoggedIn
+  isLoggedIn: state.isLoggedIn,
+  onLoadding: state.onLoadding,
+  userToken: state.userToken,
 })
-// export const getLogin = ({ isLoggedIn }) => ({
-//   isLoggedIn
-// })
-
 // or another selector
-export const getToken = (state) => ({
-  userToken: state.userToken
-})
+// ....
